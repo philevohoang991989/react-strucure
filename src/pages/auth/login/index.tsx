@@ -9,7 +9,6 @@ import { useLoginMutation } from 'services/auth'
 import { useAppDispatch } from 'hooks/store'
 import { setCredentials } from 'store/auth'
 import { storageKeys } from 'constants/storage-keys'
-import { LANGUAGE } from 'constants/language'
 import { i18nKey } from 'locales/i18n'
 import i18n from 'locales/i18n'
 import services from 'services'
@@ -21,7 +20,6 @@ function Login() {
   const [form] = Form.useForm()
   const [value, setValue] = useState<string | number>('EN')
   const StorageService = services.get('StorageService')
-  const appConfig = StorageService.get(storageKeys.config)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const onChangeLanguage = (key) => {
