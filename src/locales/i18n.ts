@@ -1,12 +1,12 @@
 import i18n from 'i18next'
 import { initReactI18next } from 'react-i18next'
 import en from './en'
-import jp from './jp'
+import vn from './vi'
 import { LANGUAGE } from 'constants/language'
 import { Config } from 'services/config.service'
 import Container from 'typedi'
 
-const resources = { en, jp }
+const resources = { en, vn }
 const configService = Container.get(Config)
 
 /**

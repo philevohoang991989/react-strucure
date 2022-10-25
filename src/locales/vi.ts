@@ -1,11 +1,12 @@
-const en = {
+const vn = {
   button: {
-    submit: 'Submit'
+    submit: 'Gửi đi'
   },
+
   label: {
-    userName: 'Username',
-    password: 'Password',
-    rememberMe: 'Remember me'
+    userName: 'Tên tài khoản',
+    password: 'Mật khẩu',
+    rememberMe: 'Ghi nhớ mật khẩu và tên tài khoản'
   },
 
   commonMessages: {
@@ -18,4 +19,4 @@ const en = {
   }
 }
 
-export default en
+export default vn

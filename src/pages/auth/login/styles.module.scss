@@ -1,3 +1,4 @@
+@import 'styles/variables';
 .wrapper {
   align-items: center;
   display: flex;
@@ -20,5 +21,31 @@
   .loginContent {
     padding: 1rem;
     width: 100%;
+  }
+  .btnChooseLang {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    background-color: #fff;
+    border-radius: 3rem;
+    &:hover {
+      background-color: #fff;
+    }
+    :global {
+      .ant-segmented:not(.ant-segmented-disabled):hover,
+      .ant-segmented:not(.ant-segmented-disabled):focus {
+        background-color: #fff !important;
+      }
+      .ant-segmented-group {
+        .ant-segmented-item {
+          color: #000;
+        }
+        .ant-segmented-item-selected {
+          border-radius: 3rem;
+          background-color: $primary-color;
+          color: #fff;
+        }
+      }
+    }
   }
 }

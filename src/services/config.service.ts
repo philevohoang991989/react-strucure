@@ -13,7 +13,7 @@ export class Config {
   static setLanguage(lng: LANGUAGE) {
     throw new Error('Method not implemented.')
   }
-  language: LANGUAGE = LANGUAGE.JP
+  language: LANGUAGE = LANGUAGE.EN
   theme: 'light' | 'dark' = 'light'
 
   constructor() {

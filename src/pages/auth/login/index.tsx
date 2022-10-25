@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Button, Checkbox, Form, Input, notification } from 'antd'
+import { useTranslation } from 'react-i18next'
+import { Button, Checkbox, Form, Input, notification, message, Segmented } from 'antd'
 import showPassWord from 'assets/images/show-password.png'
 import hidePassWord from 'assets/images/hide-password.png'
 import { CloseCircleOutlined } from '@ant-design/icons'
@@ -8,15 +9,25 @@ import { useLoginMutation } from 'services/auth'
 import { useAppDispatch } from 'hooks/store'
 import { setCredentials } from 'store/auth'
 import { storageKeys } from 'constants/storage-keys'
+import { LANGUAGE } from 'constants/language'
+import { i18nKey } from 'locales/i18n'
+import i18n from 'locales/i18n'
 import services from 'services'
 import styles from './styles.module.scss'
 
 function Login() {
   const [login] = useLoginMutation()
+  const { t } = useTranslation()
   const [form] = Form.useForm()
+  const [value, setValue] = useState<string | number>('EN')
   const StorageService = services.get('StorageService')
+  const appConfig = StorageService.get(storageKeys.config)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
+  const onChangeLanguage = (key) => {
+    i18n.changeLanguage(key.toLowerCase()).then(() => message.success('Success'))
+  }
+
   const onFinish = async (values: any) => {
     try {
       await login(values).unwrap()
@@ -46,8 +57,19 @@ function Login() {
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo)
   }
+  useEffect(() => {
+    onChangeLanguage(value)
+  }, [value])
   return (
     <div className={styles.wrapper}>
+      <div className={styles.switchLangBtn}>
+        <Segmented
+          className={styles.btnChooseLang}
+          options={['EN', 'VN']}
+          value={value}
+          onChange={setValue}
+        />
+      </div>
       <div className={styles.formWrapper}>
         <Form
           form={form}
@@ -61,7 +83,7 @@ function Login() {
           autoComplete='on'
         >
           <Form.Item
-            label='Username'
+            label={t(i18nKey.label.userName)}
             name='username'
             rules={[{ required: true, message: 'Please input your username!' }]}
           >
@@ -69,7 +91,7 @@ function Login() {
           </Form.Item>
 
           <Form.Item
-            label='Password'
+            label={t(i18nKey.label.password)}
             name='password'
             rules={[{ required: true, message: 'Please input your password!' }]}
           >
@@ -81,12 +103,12 @@ function Login() {
           </Form.Item>
 
           <Form.Item name='remember' valuePropName='checked'>
-            <Checkbox>Remember me</Checkbox>
+            <Checkbox>{t(i18nKey.label.rememberMe)}</Checkbox>
           </Form.Item>
 
           <Form.Item>
             <Button type='primary' htmlType='submit'>
-              Submit
+              {t(i18nKey.button.submit)}
             </Button>
           </Form.Item>
         </Form>
