@@ -1,0 +1,24 @@
+.btnCollapsed {
+  width: 50px;
+}
+.slider {
+  background-color: #fff;
+  :global {
+    .ant-menu-item {
+      margin: 0 0 !important;
+    }
+  }
+}
+.menuItem {
+  height: 40px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-color: transparent !important;
+  span {
+    height: max-content;
+  }
+  p {
+    margin-bottom: 0;
+  }
+}
