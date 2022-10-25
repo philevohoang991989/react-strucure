@@ -1,5 +1,6 @@
 import React from 'react'
 import { Layout, Dropdown, Menu, Avatar } from 'antd'
+import { UserOutlined } from '@ant-design/icons'
 import UserSettingIcon from 'assets/icons/ico_user-setting.svg'
 import LogoutIcon from 'assets/icons/ico_logout.svg'
 import styles from './Header.module.scss'
@@ -35,8 +36,11 @@ export const Header: React.FC = () => {
         <div className={styles.headerContent}>
           <Dropdown overlay={menu} trigger={['click']}>
             <div className={styles.headerProfile}>
-              <Avatar>P</Avatar>
-              <p className={styles.userName}>Phi</p>
+              <Avatar icon={<UserOutlined />} />
+              <div className={styles.userInfo}>
+                <span className={styles.userName}>Phi</span>
+                <span>Logout</span>
+              </div>
             </div>
           </Dropdown>
         </div>

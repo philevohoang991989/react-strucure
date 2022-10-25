@@ -11,6 +11,7 @@ import styles from './styles.module.scss'
 
 function Login() {
   const [login] = useLoginMutation()
+  const [form] = Form.useForm()
   const StorageService = services.get('StorageService')
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
@@ -20,15 +21,15 @@ function Login() {
       console.log({ values })
 
       const username = values.username
-      const fakeUser: any = {
+      const infoUser: any = {
         token: 'token',
         user: {
           username,
           role: 1
         }
       }
-      dispatch(setCredentials(fakeUser))
-      StorageService.set(storageKeys.authProfile, fakeUser)
+      dispatch(setCredentials(infoUser))
+      StorageService.set(storageKeys.authProfile, infoUser)
       navigate('/')
     } catch (err) {
       notification.error({
@@ -47,9 +48,11 @@ function Login() {
     <div className={styles.wrapper}>
       <div className={styles.formWrapper}>
         <Form
-          name='basic'
-          labelCol={{ span: 8 }}
-          wrapperCol={{ span: 16 }}
+          form={form}
+          name='login'
+          wrapperCol={{ span: 24 }}
+          layout='vertical'
+          className={styles.loginContent}
           initialValues={{ remember: true }}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
@@ -71,11 +74,11 @@ function Login() {
             <Input.Password />
           </Form.Item>
 
-          <Form.Item name='remember' valuePropName='checked' wrapperCol={{ offset: 8, span: 16 }}>
+          <Form.Item name='remember' valuePropName='checked'>
             <Checkbox>Remember me</Checkbox>
           </Form.Item>
 
-          <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+          <Form.Item>
             <Button type='primary' htmlType='submit'>
               Submit
             </Button>

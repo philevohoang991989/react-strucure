@@ -22,7 +22,7 @@ type RouteType = {
 }
 
 const StorageService = services.get('StorageService')
-const APP_NAME = process.env.APP_NAME || 'AO_ADMIN'
+const APP_NAME = process.env.APP_NAME || 'REACT_TEMPLATE'
 const titlePage = (title: string) => `${APP_NAME} - ${title}`
 const lazyLoadRoute = (pageName: string) => lazy(() => import(`pages/${pageName}`))
 
@@ -108,12 +108,13 @@ const renderRoutes = (routes: RouteType[]) =>
 const RoutesApp = () => {
   const [routes, setRoutes] = useState<RouteType[]>([])
   const isAdmin = useIsRoleAdmin()
+
   const dispatch = useAppDispatch()
   const { user: authProfileStore } = useAuth()
 
   const authProfileLocal = StorageService.get(storageKeys.authProfile)
   const isAuthenticated = !!authProfileLocal
-
+  console.log({ isAuthenticated })
   useEffect(() => {
     // TODO: fetch profile
 

@@ -1,13 +1,15 @@
+@import '../../styles/variables';
 .root {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 200;
-  background-color: blue;
+  background-color: #fff;
+  box-shadow: 0 10px 10px -5px;
   :global {
     .ant-layout-header {
-      background: var(--cl-grey-94);
+      background-color: var(--cl-grey-94);
       border-bottom: 1px solid var(--cl-grey-85);
       color: var(--cl-grey-0);
       height: 56px;
@@ -24,6 +26,7 @@
 }
 
 .headerContent {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 18px;
@@ -36,55 +39,29 @@
 }
 
 .headerProfile {
+  position: relative;
   display: flex;
+  height: max-content;
   align-items: center;
+  height: 50px;
   cursor: pointer;
-}
-
-.previewAvatar {
-  border-radius: 50%;
-  height: 25px;
-  width: 25px;
-  object-fit: cover;
-}
-
-.userName {
-  margin-left: 12px;
-  font-weight: 600;
-  color: var(--cl-grey-35);
-  line-height: 22px;
-}
-
-.bellIcon {
-  :global {
-    .cls-1 {
-      fill: #8c8c8c;
+  .userInfo {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-left: 0.5rem;
+    span {
+      line-height: 1rem;
+      margin-bottom: 0.2rem;
+      &:last-child {
+        margin-bottom: 0;
+        text-transform: uppercase;
+        font-weight: bold;
+        color: $primary-color;
+        &:hover {
+          cursor: pointer;
+        }
+      }
     }
   }
-}
-
-.menuDropdown {
-  margin-top: 4px !important;
-  padding: 0 !important;
-  border-radius: 0 !important;
-  min-width: 180px;
-
-  :global {
-    .ant-dropdown-menu-item,
-    .ant-dropdown-menu-submenu-title {
-      padding: 8px 14px;
-    }
-
-    .ant-dropdown-menu-item:hover,
-    .ant-dropdown-menu-submenu-title:hover {
-      background-color: var(--cl-grey-94);
-    }
-  }
-}
-
-.menuItemContent {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 8px;
 }
