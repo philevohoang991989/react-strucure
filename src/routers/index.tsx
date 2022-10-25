@@ -114,19 +114,18 @@ const RoutesApp = () => {
 
   const authProfileLocal = StorageService.get(storageKeys.authProfile)
   const isAuthenticated = !!authProfileLocal
-  console.log({ isAuthenticated })
   useEffect(() => {
     // TODO: fetch profile
 
     if (isAuthenticated && !authProfileStore) {
-      const fakeUser = {
+      const infoUser = {
         token: authProfileLocal?.token,
         user: {
           ...authProfileLocal
         }
       }
 
-      dispatch(setCredentials(fakeUser))
+      dispatch(setCredentials(infoUser))
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [authProfileLocal, authProfileStore])

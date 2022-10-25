@@ -1,6 +1,8 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button, Checkbox, Form, Input, notification } from 'antd'
+import showPassWord from 'assets/images/show-password.png'
+import hidePassWord from 'assets/images/hide-password.png'
 import { CloseCircleOutlined } from '@ant-design/icons'
 import { useLoginMutation } from 'services/auth'
 import { useAppDispatch } from 'hooks/store'
@@ -56,7 +58,7 @@ function Login() {
           initialValues={{ remember: true }}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
-          autoComplete='off'
+          autoComplete='on'
         >
           <Form.Item
             label='Username'
@@ -71,7 +73,11 @@ function Login() {
             name='password'
             rules={[{ required: true, message: 'Please input your password!' }]}
           >
-            <Input.Password />
+            <Input.Password
+              iconRender={(visible) => (
+                <img src={visible ? showPassWord : hidePassWord} alt='hide pass' />
+              )}
+            />
           </Form.Item>
 
           <Form.Item name='remember' valuePropName='checked'>
