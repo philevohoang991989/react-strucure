@@ -12,6 +12,7 @@ import { storageKeys } from 'constants/storage-keys'
 import { i18nKey } from 'locales/i18n'
 import i18n from 'locales/i18n'
 import services from 'services'
+import { LoginParams } from 'interfaces/auth'
 import styles from './styles.module.scss'
 
 function Login() {
@@ -28,16 +29,17 @@ function Login() {
 
   const onFinish = async (values: any) => {
     try {
-      await login(values).unwrap()
-      console.log({ values })
-
-      const username = values.username
-      const infoUser: any = {
-        token: 'token',
+      let param: LoginParams = {
         user: {
-          username,
-          role: 1
+          email: values.username,
+          password: values.password
         }
+      }
+      const dataLogin = await login(param).unwrap()
+
+      const infoUser: any = {
+        token: dataLogin?.token,
+        user: dataLogin?.current_user
       }
       dispatch(setCredentials(infoUser))
       StorageService.set(storageKeys.authProfile, infoUser)

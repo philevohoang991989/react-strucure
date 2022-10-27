@@ -14,10 +14,11 @@ import { storageKeys } from 'constants/storage-keys'
 const StorageService = services.get('StorageService')
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: process.env.API_ENDPOINT || 'http://localhost:3000/api',
+  baseUrl: process.env.REACT_APP_API_ENDPOINT || 'http://localhost:3000/api',
 
   prepareHeaders: (headers, { getState }) => {
     const token = (getState() as RootState).auth.token
+    console.log('baseQuery', process.env.API_ENDPOINT)
     if (token) {
       headers.set('authorization', `Bearer ${token}`)
     }
