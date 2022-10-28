@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import {
   ContactsOutlined,
   MenuUnfoldOutlined,
@@ -13,6 +14,7 @@ import { setHasSideBar } from 'store/sideBar'
 
 import styles from './Sidebar.module.scss'
 import { useIsRoleAdmin } from 'hooks/useAuth'
+import { i18nKey } from 'locales/i18n'
 
 type MenuListType = {
   key: string
@@ -23,23 +25,24 @@ type MenuListType = {
 
 const { Sider } = Layout
 
-const menuList: MenuListType[] = [
-  {
-    key: '1',
-    href: '/',
-    linkText: 'ダッシュボード',
-    icon: <HomeOutlined />
-  },
-  {
-    key: '2',
-    href: '/contact',
-    linkText: 'コンタクト',
-    icon: <ContactsOutlined />
-  }
-]
-
 export const SideBar: React.FC = () => {
+  const { t } = useTranslation()
+  const menuList: any = [
+    {
+      key: '1',
+      href: '/',
+      linkText: t(i18nKey.menu.home),
+      icon: <HomeOutlined />
+    },
+    {
+      key: '2',
+      href: '/contact',
+      linkText: t(i18nKey.menu.contact),
+      icon: <ContactsOutlined />
+    }
+  ]
   const location = useLocation()
+
   const [collapsed, setIsCollapsed] = useState<boolean>(false)
   const [selectedKeys, setSelectedKeys] = useState<string[]>([])
   const [currentMenu, setCurrentMenu] = useState<MenuListType[]>([])

@@ -25,4 +25,7 @@ export interface UserResponse {
   current_user: UserInfo
   token: string
   role?: number
+  status: number
+  error?: any
+  message?: string
 }

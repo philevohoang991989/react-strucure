@@ -14,10 +14,16 @@ export const authApi = createApi({
         method: 'POST',
         body: credentials
       })
+    }),
+    logOut: builder.mutation<any, void>({
+      query: () => ({
+        url: '/users/sign_out',
+        method: 'DELETE'
+      })
     })
   })
 })
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useLoginMutation } = authApi
+export const { useLoginMutation, useLogOutMutation } = authApi

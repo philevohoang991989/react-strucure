@@ -65,3 +65,23 @@
     }
   }
 }
+.menuProfile {
+  position: relative;
+  min-width: 10rem;
+  border-radius: 0.5rem;
+  .menuItemContent {
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    &:last-child {
+      margin-bottom: 0;
+    }
+    &:hover {
+      cursor: pointer;
+    }
+    img {
+      margin-right: 0.5rem;
+    }
+  }
+}

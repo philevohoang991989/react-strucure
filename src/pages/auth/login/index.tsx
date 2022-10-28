@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { Button, Checkbox, Form, Input, notification, message, Segmented } from 'antd'
+import { Button, Checkbox, Form, Input, notification, Segmented } from 'antd'
 import showPassWord from 'assets/images/show-password.png'
 import hidePassWord from 'assets/images/hide-password.png'
 import { CloseCircleOutlined } from '@ant-design/icons'
@@ -24,7 +24,7 @@ function Login() {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const onChangeLanguage = (key) => {
-    i18n.changeLanguage(key.toLowerCase()).then(() => message.success('Success'))
+    i18n.changeLanguage(key.toLowerCase())
   }
 
   const onFinish = async (values: any) => {
@@ -36,14 +36,42 @@ function Login() {
         }
       }
       const dataLogin = await login(param).unwrap()
+      console.log({ dataLogin })
 
-      const infoUser: any = {
-        token: dataLogin?.token,
-        user: dataLogin?.current_user
+      if (dataLogin.status !== 200) {
+        if (dataLogin.error.time_lock !== undefined) {
+          form.setFields([
+            {
+              name: 'password',
+              errors: [t(i18nKey.errorMessage.passwordAttemptsExceedLimit)]
+            }
+          ])
+        } else if (dataLogin.error.sign_in_fail !== undefined) {
+          form.setFields([
+            {
+              name: 'password',
+              errors: [
+                t(i18nKey.errorMessage.attemptsCounter, {
+                  count: 5 - dataLogin?.error?.sign_in_fail
+                })
+              ]
+            }
+          ])
+        } else {
+          notification.error({
+            message: t(i18nKey.commonMessages.error),
+            description: t(i18nKey.errorMessage.login)
+          })
+        }
+      } else {
+        const infoUser: any = {
+          token: dataLogin?.token,
+          user: dataLogin?.current_user
+        }
+        dispatch(setCredentials(infoUser))
+        StorageService.set(storageKeys.authProfile, infoUser)
+        navigate('/')
       }
-      dispatch(setCredentials(infoUser))
-      StorageService.set(storageKeys.authProfile, infoUser)
-      navigate('/')
     } catch (err) {
       notification.error({
         message: 'Fetch login error',
