@@ -1,15 +1,19 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import type { UserResponse } from 'interfaces/auth'
 import type { RootState } from '@/store'
+import services from 'services'
+import { storageKeys } from 'constants/storage-keys'
 
 type AuthState = {
-  user: UserResponse | null
+  user: any | {}
   token: string | null
 }
 
+const StorageService = services.get('StorageService')
+const userInfo = StorageService.get(storageKeys.authProfile)
+
 const initialState: AuthState = {
-  user: null,
-  token: null
+  user: userInfo?.user || {},
+  token: userInfo?.token || ''
 }
 
 export const authSlice = createSlice({
@@ -20,12 +24,15 @@ export const authSlice = createSlice({
       state.token = action.payload.token
       state.user = action.payload.user
     },
-    resetCredentials: () => initialState
+    logout: (state) => {
+      state.token = ''
+      state.user = {}
+    }
   }
 })
 
 // Action creators are generated for each case reducer function
-export const { setCredentials, resetCredentials } = authSlice.actions
+export const { setCredentials, logout } = authSlice.actions
 
 export default authSlice.reducer
 

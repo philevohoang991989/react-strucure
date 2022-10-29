@@ -34,7 +34,6 @@ function Login() {
         }
       }
       const dataLogin: any = await authApi.login(param)
-      console.log({ dataLogin })
 
       if (dataLogin.status !== 200) {
         if (dataLogin.error.time_lock !== undefined) {

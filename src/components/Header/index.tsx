@@ -1,5 +1,6 @@
 import React from 'react'
 import { Layout, Avatar, Popover, message } from 'antd'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import services from 'services'
@@ -12,21 +13,23 @@ import { storageKeys } from 'constants/storage-keys'
 import { i18nKey } from 'locales/i18n'
 import { useAppDispatch } from 'hooks/store'
 // import authApi from 'services/auth'
-import { resetCredentials } from 'store/auth'
+import { logout, selectCurrentUser } from 'store/auth'
 
 export const Header: React.FC = () => {
   const { t } = useTranslation()
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const StorageService = services.get('StorageService')
-  const userInfo = StorageService.get(storageKeys.authProfile)
+  const userInfo = useSelector(selectCurrentUser)
+  // const userInfo = StorageService.get(storageKeys.authProfile)
 
   const handleLogout = async () => {
     // await authApi.logout()
-    dispatch(resetCredentials())
+    await dispatch(logout())
+
     message.success(t(i18nKey.messageSuccess.msgLogout))
     StorageService.remove(storageKeys.authProfile)
-    navigate('login')
+    await navigate('login')
   }
 
   const contentProfile = (
@@ -55,7 +58,7 @@ export const Header: React.FC = () => {
             <Avatar icon={<UserOutlined />} />
             <div className={styles.userInfo}>
               <span className={styles.userName}>
-                {userInfo.user.family_name + ' ' + userInfo.user.first_name}
+                {userInfo.family_name + ' ' + userInfo.first_name}
               </span>
             </div>
           </Popover>
