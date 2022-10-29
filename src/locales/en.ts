@@ -1,10 +1,14 @@
 const en = {
   button: {
-    submit: 'Submit'
+    submit: 'Submit',
+    linkToDashboardPages: 'Link to Dashboard Pages'
   },
   menu: {
     home: 'HomePage',
     contact: 'Contact'
+  },
+  tab: {
+    nextTrip: 'Next Trip'
   },
   label: {
     userName: 'Username',
@@ -32,7 +36,8 @@ const en = {
     passwordAttemptsExceedLimit:
       'Sorry, there have been more than 5 failed login attempts for this account.\nIt is temporarily blocked. Please try again in 10 minutes.',
     attemptsCounter: 'Attempt(s) remaining: {{count}}',
-    login: 'The email address or password is incorrect. Please retry...'
+    login: 'The email address or password is incorrect. Please retry...',
+    pageNotFound: 'The page you are looking for can not be not found'
   }
 }
 

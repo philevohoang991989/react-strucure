@@ -15,6 +15,7 @@ import { setHasSideBar } from 'store/sideBar'
 import styles from './Sidebar.module.scss'
 import { useIsRoleAdmin } from 'hooks/useAuth'
 import { i18nKey } from 'locales/i18n'
+// import { i18nKey } from 'locales/i18n'
 
 type MenuListType = {
   key: string
@@ -27,20 +28,7 @@ const { Sider } = Layout
 
 export const SideBar: React.FC = () => {
   const { t } = useTranslation()
-  const menuList: any = [
-    {
-      key: '1',
-      href: '/',
-      linkText: t(i18nKey.menu.home),
-      icon: <HomeOutlined />
-    },
-    {
-      key: '2',
-      href: '/contact',
-      linkText: t(i18nKey.menu.contact),
-      icon: <ContactsOutlined />
-    }
-  ]
+
   const location = useLocation()
 
   const [collapsed, setIsCollapsed] = useState<boolean>(false)
@@ -49,6 +37,20 @@ export const SideBar: React.FC = () => {
 
   const isAdmin = useIsRoleAdmin()
   const dispatch = useAppDispatch()
+  const menuList: any = [
+    {
+      key: '1',
+      href: '/',
+      linkText: `${t(i18nKey.menu.home)}`,
+      icon: <HomeOutlined />
+    },
+    {
+      key: '2',
+      href: '/contact',
+      linkText: `${t(i18nKey.menu.contact)}`,
+      icon: <ContactsOutlined />
+    }
+  ]
 
   useEffect(() => {
     const menu = menuList
@@ -69,6 +71,7 @@ export const SideBar: React.FC = () => {
     })
 
     setCurrentMenu(dataMerged)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAdmin])
 
   const toggleCollapsed = () => {

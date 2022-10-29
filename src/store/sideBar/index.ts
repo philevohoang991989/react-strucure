@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import type { RootState } from '@/store'
+import type { RootState } from 'store'
 
 type sideBarState = {
   isHasSideBar: boolean
 }
 
 const initialState: sideBarState = {
-  isHasSideBar: true,
+  isHasSideBar: true
 }
 
 export const sideBarSlice = createSlice({
@@ -15,8 +15,8 @@ export const sideBarSlice = createSlice({
   reducers: {
     setHasSideBar: (state, action: PayloadAction<boolean>) => {
       state.isHasSideBar = action.payload
-    },
-  },
+    }
+  }
 })
 
 // Action creators are generated for each case reducer function

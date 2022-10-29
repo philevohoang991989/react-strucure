@@ -1,0 +1,9 @@
+@import 'styles/variables';
+.ant-card-body {
+  padding: 0;
+}
+.ant-card {
+  padding: 0.5rem 1rem 1rem 1rem;
+  background-color: $primary-color;
+  border-radius: 0.5rem;
+}

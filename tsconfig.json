@@ -22,7 +22,7 @@
     "preserveConstEnums": true,
     "sourceMap": true,
     "paths": {
-      "@/*": ["*"]
+      "*": ["*"]
     },
     "typeRoots": ["node_modules/@types"]
   },

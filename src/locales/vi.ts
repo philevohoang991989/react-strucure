@@ -1,10 +1,14 @@
 const vn = {
   button: {
-    submit: 'Gửi đi'
+    submit: 'Gửi đi',
+    linkToDashboardPages: 'Link to Dashboard Pages'
   },
   menu: {
     home: 'Trang chủ',
     contact: 'Liên hệ'
+  },
+  tab: {
+    nextTrip: 'Next Trip'
   },
   label: {
     userName: 'Tên tài khoản',
@@ -32,7 +36,8 @@ const vn = {
     passwordAttemptsExceedLimit:
       'Xin lỗi, đã có hơn 5 lần đăng nhập không thành công vào tài khoản này. \n Tài khoản này tạm thời bị chặn. Vui lòng thử lại sau 10 phút.',
     attemptsCounter: 'Attempt(s) remaining: {{count}}',
-    login: 'Địa chỉ email hoặc mật khẩu không chính xác. Vui lòng thử lại...'
+    login: 'Địa chỉ email hoặc mật khẩu không chính xác. Vui lòng thử lại...',
+    pageNotFound: 'The page you are looking for can not be not found'
   }
 }
 
