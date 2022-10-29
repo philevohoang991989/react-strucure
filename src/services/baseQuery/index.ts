@@ -1,1 +1,0 @@
-export { CustomBaseQuery } from './CustomBaseQuery'

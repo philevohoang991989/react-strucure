@@ -3,10 +3,7 @@ import type { PreloadedState } from '@reduxjs/toolkit'
 import authReducer from './auth'
 import sideBarReducer from './sideBar'
 
-import { authApi } from 'services/auth'
-
 const rootReducer = combineReducers({
-  [authApi.reducerPath]: authApi.reducer,
   auth: authReducer,
   sideBar: sideBarReducer
 })
@@ -14,7 +11,6 @@ const rootReducer = combineReducers({
 export const setupStore = (preloadedState?: PreloadedState<RootState>) =>
   configureStore({
     reducer: rootReducer,
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(authApi.middleware),
     preloadedState
   })
 

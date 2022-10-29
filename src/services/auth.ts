@@ -1,29 +1,13 @@
-// Need to use the React-specific entry point to import createApi
-import { createApi } from '@reduxjs/toolkit/query/react'
-import { CustomBaseQuery } from './baseQuery'
-import { LoginParams, UserResponse } from 'interfaces/auth'
+import axiosInstance from 'services/axios'
+const authApi = {
+  login(data) {
+    const url = '/users/sign_in'
+    return axiosInstance.post(url, data)
+  },
+  logout() {
+    const url = '/users/sign_out'
+    return axiosInstance.delete(url)
+  }
+}
 
-// Define a service using a base URL and expected endpoints
-export const authApi = createApi({
-  reducerPath: 'authApi',
-  baseQuery: CustomBaseQuery,
-  endpoints: (builder) => ({
-    login: builder.mutation<UserResponse, LoginParams>({
-      query: (credentials) => ({
-        url: '/users/sign_in', // TODO: fix URL
-        method: 'POST',
-        body: credentials
-      })
-    }),
-    logOut: builder.mutation<any, void>({
-      query: () => ({
-        url: '/users/sign_out',
-        method: 'DELETE'
-      })
-    })
-  })
-})
-
-// Export hooks for usage in functional components, which are
-// auto-generated based on the defined endpoints
-export const { useLoginMutation, useLogOutMutation } = authApi
+export default authApi

@@ -11,7 +11,7 @@ import styles from './Header.module.scss'
 import { storageKeys } from 'constants/storage-keys'
 import { i18nKey } from 'locales/i18n'
 import { useAppDispatch } from 'hooks/store'
-import { useLogOutMutation } from 'services/auth'
+// import authApi from 'services/auth'
 import { resetCredentials } from 'store/auth'
 
 export const Header: React.FC = () => {
@@ -19,11 +19,10 @@ export const Header: React.FC = () => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const StorageService = services.get('StorageService')
-  const [logOut] = useLogOutMutation()
   const userInfo = StorageService.get(storageKeys.authProfile)
 
   const handleLogout = async () => {
-    await logOut()
+    // await authApi.logout()
     dispatch(resetCredentials())
     message.success(t(i18nKey.messageSuccess.msgLogout))
     StorageService.remove(storageKeys.authProfile)
