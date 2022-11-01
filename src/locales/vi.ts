@@ -10,6 +10,12 @@ const vn = {
   tab: {
     nextTrip: 'Next Trip'
   },
+  text: {
+    nonTeamSubText: 'Outside the team, partners, guests, etc.',
+    administrator: 'Administrator',
+    user: 'User',
+    nonTeam: 'non-Team'
+  },
   label: {
     userName: 'Tên tài khoản',
     password: 'Mật khẩu',

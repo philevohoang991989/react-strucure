@@ -7,6 +7,12 @@ const en = {
     home: 'HomePage',
     contact: 'Contact'
   },
+  text: {
+    nonTeamSubText: 'Outside the team, partners, guests, etc.',
+    administrator: 'Administrator',
+    user: 'User',
+    nonTeam: 'non-Team'
+  },
   tab: {
     nextTrip: 'Next Trip'
   },

@@ -26,6 +26,8 @@ function Login() {
   }
 
   const onFinish = async (values: any) => {
+    console.log('onFinish')
+
     try {
       let param: LoginParams = {
         user: {
@@ -34,6 +36,7 @@ function Login() {
         }
       }
       const dataLogin: any = await authApi.login(param)
+      console.log({ dataLogin })
 
       if (dataLogin.status !== 200) {
         if (dataLogin.error.time_lock !== undefined) {
@@ -62,8 +65,8 @@ function Login() {
         }
       } else {
         const infoUser: any = {
-          token: dataLogin?.data.token,
-          user: dataLogin?.data.current_user
+          token: dataLogin?.token,
+          user: dataLogin?.current_user
         }
         dispatch(setCredentials(infoUser))
         StorageService.set(storageKeys.authProfile, infoUser)
