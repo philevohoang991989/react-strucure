@@ -12,6 +12,25 @@
     .ant-menu-item {
       margin: 0 0 !important;
     }
+    .ant-select:not(.ant-select-customize-input) .ant-select-selector {
+      height: 50px;
+    }
+
+    .ant-select-selector {
+      height: 50px;
+      .ant-select-selection-item {
+        p {
+          &:first-child {
+            span {
+              display: none;
+            }
+          }
+          &:last-child {
+            display: none;
+          }
+        }
+      }
+    }
   }
 }
 .menuItem {
@@ -35,6 +54,8 @@
 }
 .menuTeamItem {
   background-color: $primary-light-color;
+  display: flex;
+  align-items: center;
 
   &:first-child {
     margin-top: 4px !important;
@@ -54,7 +75,14 @@
         height: 22px;
       }
     }
-
+    // .ant-select-item-option-content {
+    //   .teamAvatar {
+    //     position: relative;
+    //     .anticon {
+    //       width: 100%;
+    //     }
+    //   }
+    // }
     .anticon-usergroup-add {
       svg {
         width: 25px;
@@ -67,60 +95,91 @@
       height: 18px;
     }
   }
-
-  .teamInfo {
-    height: 56px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    column-gap: 20px;
-
-    .teamAvatar {
-      width: 48px;
-      height: 48px;
-      background-color: #e6e6e6;
-      line-height: 48px;
-      text-align: center;
-      font-weight: 500;
-      font-size: 20px;
-      border-radius: 3px;
-      cursor: pointer;
-    }
-
-    .teamName {
-      color: #707070;
-      margin-right: 20px;
-
-      .fullName {
-        font-weight: 500;
-        font-size: 18px;
-        color: $primary-dark-color;
-        margin-bottom: 0;
-        .roleName {
-          font-size: 10px;
-        }
-      }
-
-      .teamPlan {
-        font-size: 10px;
-        margin-bottom: 0;
-      }
-    }
-  }
 }
 .switchTeamDropdown {
-  top: 59px !important;
-  left: 22px !important;
   box-shadow: 3px 3px 6px #00000029;
   border: 1px solid #d1d1d1;
   border-radius: 5px;
-  width: 350px;
-  height: auto;
-  position: fixed !important;
+  width: 100%;
+  :global {
+    .ant-select-selector {
+      height: 56px;
+      display: flex;
+      align-items: center;
+      .ant-select-selection-item {
+        display: flex;
+        .teamInfo {
+          height: 56px;
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          column-gap: 20px;
+
+          .teamAvatar {
+            width: 48px;
+            height: 48px;
+            background-color: #e6e6e6;
+            line-height: 48px;
+            text-align: center;
+            font-weight: 500;
+            font-size: 20px;
+            border-radius: 3px;
+            cursor: pointer;
+          }
+
+          .teamName {
+            color: #707070;
+            margin-right: 20px;
+
+            .fullName {
+              font-weight: 500;
+              font-size: 18px;
+              color: $primary-dark-color;
+              margin-bottom: 0;
+              .roleName {
+                font-size: 10px;
+              }
+            }
+
+            .teamPlan {
+              font-size: 10px;
+              margin-bottom: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .teamAvatar {
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+    background-color: #e6e6e6;
+    text-align: center;
+    border-radius: 3px;
+
+    :global {
+      span {
+        font-weight: 700;
+        font-size: 16px;
+      }
+
+      .anticon-usergroup-add {
+        svg {
+          width: 20px;
+          height: 20px;
+        }
+      }
+    }
+  }
 
   :global {
     .ant-dropdown-menu {
       position: fixed;
+    }
+    input {
+      height: 56px;
     }
   }
 }
@@ -159,5 +218,48 @@
   .teamName {
     font-weight: bold;
     font-size: 18px;
+  }
+}
+.teamInfo {
+  height: 56px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  column-gap: 2px;
+
+  .teamAvatar {
+    position: relative;
+    width: 48px;
+    height: 48px;
+    background-color: #e6e6e6;
+    line-height: 48px;
+    text-align: center;
+    font-weight: 500;
+    font-size: 20px;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+
+  .teamName {
+    color: #707070;
+    margin-right: 20px;
+
+    .fullName {
+      display: flex;
+      align-items: center;
+      font-weight: 500;
+      font-size: 18px;
+      color: $primary-dark-color;
+      margin-bottom: 0;
+      .roleName {
+        padding-left: 4px;
+        font-size: 10px;
+      }
+    }
+
+    .teamPlan {
+      font-size: 10px;
+      margin-bottom: 0;
+    }
   }
 }
