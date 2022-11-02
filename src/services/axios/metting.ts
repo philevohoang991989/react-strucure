@@ -1,4 +1,6 @@
 import axios from 'axios'
+import { storageKeys } from 'constants/storage-keys'
+import services from 'services'
 
 const axiosInstanceMetting = axios.create({
   baseURL: `${process.env.REACT_APP_API_ENDPOINT_METTING}`,
@@ -11,25 +13,32 @@ const axiosInstanceMetting = axios.create({
 
 // Interceptors
 // Add a request interceptor
-axios.interceptors.request.use(
-  function (config) {
-    console.log({ config })
+axiosInstanceMetting.interceptors.request.use(
+    (config: any) => {
+        const StorageService = services.get('StorageService')
+        const infoUser = StorageService.get(storageKeys.authProfile)
+        const token = infoUser && infoUser.token
 
-    // Do something before request is sent
-    return config
-  },
-  function (error) {
-    // Do something with request error
-    return Promise.reject(error)
-  }
+        if (token) {
+            // eslint-disable-next-line no-param-reassign
+            config.headers.Authorization = `Bearer ${token}`
+        } else {
+            config.headers.Authorization = ``
+        }
+
+        return config
+    },
+    (error) => {
+        return Promise.reject(error)
+    }
 )
 
 // Add a response interceptor
-axios.interceptors.response.use(
+axiosInstanceMetting.interceptors.response.use(
   function (response) {
     // Any status code that lie within the range of 2xx cause this function to trigger
     // Do something with response data
-    return response
+    return response.data
   },
   function (error) {
     // Any status codes that falls outside the range of 2xx cause this function to trigger

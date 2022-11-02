@@ -22,7 +22,6 @@ import { useSelector } from 'react-redux'
 import { selectListTeam, selectSelectedTeam, switchTeam } from 'store/team'
 import services from 'services'
 import { storageKeys } from 'constants/storage-keys'
-// import { i18nKey } from 'locales/i18n'
 
 type MenuListType = {
   key: string
